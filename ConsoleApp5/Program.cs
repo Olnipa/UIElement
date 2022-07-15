@@ -12,15 +12,19 @@
 
             while (isWorking)
             {
+                int minValue = 0;
+                int maxValue = 100;
+
                 DrawBar(healthPercent, "Здоровье", ConsoleColor.Red, healthBarPosition);
                 DrawBar(manaPercent, "Мана", ConsoleColor.Blue, manaBarPosition);
 
                 Console.WriteLine("\n");
-                healthPercent = ReadNumber("Укажите остаток жизней от 0 до 100%: ");
-                manaPercent = ReadNumber("Укажите остаток маны от 0 до 100%: ");
+                healthPercent = ReadNumber($"Укажите остаток жизней от {minValue} до {maxValue}%: ", minValue, maxValue);
+                manaPercent = ReadNumber($"Укажите остаток маны от {minValue} до {maxValue}%: ", minValue, maxValue );
                 Console.Clear();
             }
         }
+
         static void DrawBar(int valuePercent, string name, ConsoleColor color, int position, int maxvalue = 20)
         {
             Console.SetCursorPosition(position, 3);
@@ -48,11 +52,10 @@
             Console.BackgroundColor = defaultColor;
             Console.Write("]");
         }
-        static int ReadNumber(string message)
+
+        static int ReadNumber(string message, int minValue, int maxValue)
         {
             int value = -1;
-            int minValue = 0;
-            int maxValue = 100;
 
             while (value < minValue || value > maxValue)
             {
@@ -61,7 +64,7 @@
 
                 if (value < minValue || value > maxValue)
                 {
-                    Console.WriteLine("Вы ввели недопустимое значение. Пожалуйста, введите значение от 0 до 100.");
+                    Console.WriteLine($"Вы ввели недопустимое значение. Пожалуйста, введите значение от {minValue} до {maxValue}.");
                 }
                 else
                 {
